@@ -32,14 +32,12 @@ hexo-chapter-drawer/
 
 ### github安装
 
-```bash
+1. 复刻仓库
+
+2. ```bash
+
 npm install github:你的GitHub用户名/hexo-chapter-drawer --save
-```
 
-或
-
-```
-npm install hexo-chapter-drawer --save
 ```
 
 # 使用说明
