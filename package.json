@@ -1,0 +1,28 @@
+{
+  "name": "hexo-chapter-drawer",
+  "version": "1.0.0",
+  "description": "Hexo插入式抽屉|可放入图片，文字等等|",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "hexo",
+    "hexo-plugin",
+    "hexo-chapter",
+    "hexo-drawer",
+    "hexo-comic",
+    "漫画插件",
+    "章节抽屉"
+  ],
+  "author": "exwxsz",
+  "license": "MIT",
+  "homepage": "https://github.com/exwxsz/hexo-chapter-drawer#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/exwxsz/hexo-chapter-drawer.git"
+  },
+  "hexo": {
+    "type": "plugin"
+  }
+}

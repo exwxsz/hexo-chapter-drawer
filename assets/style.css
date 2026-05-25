@@ -1,0 +1,215 @@
+/* 漫画抽屉样式 - 最终完美版 */
+
+/* 1. 全局重置：统一抽屉内部所有元素的盒模型与默认样式，避免受外部样式干扰 */
+.chapter-drawer-wrapper * {
+  margin: 0 !important;
+  padding: 0 !important;
+  box-sizing: border-box !important;
+  background: none !important;
+  border: none !important;
+  font-family: system-ui, -apple-system, sans-serif !important;
+}
+
+/* 2. 抽屉最外层容器：固定定位在右侧，占满视口高度，默认不拦截鼠标事件 */
+.chapter-drawer-wrapper {
+  position: fixed !important;
+  top: 0 !important;
+  right: 0 !important;
+  height: 100vh !important;
+  z-index: 999999999999 !important;
+  pointer-events: none !important;
+}
+
+/* 3. 抽屉切换触发按钮：固定在页面右侧垂直居中，用于点击展开抽屉 */
+.drawer-toggle-btn {
+  position: fixed !important;
+  top: 50% !important;
+  transform: translateY(-50%) !important;
+  right: 0 !important;
+  width: 20px !important;
+  height: 50px !important;
+  background: #2d8cf0 !important;
+  color: #ffffff !important;
+  font-size: 48px !important;
+  font-weight: bold !important;
+  border-radius: 12px 0 0 12px !important;
+  cursor: grab !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  pointer-events: all !important;
+  /* 按钮自身允许点击 */
+  box-shadow: -4px 0 20px rgba(0, 0, 0, 0.4) !important;
+  transition: all 0.2s ease !important;
+  user-select: none !important;
+  z-index: 999999999999 !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+}
+
+/* 触发按钮：按下时的光标样式 */
+.drawer-toggle-btn:active {
+  cursor: grabbing !important;
+}
+
+/* 触发按钮：悬停时的放大与变色效果 */
+.drawer-toggle-btn:hover {
+  background: #40a9ff !important;
+  width: 110px !important;
+}
+
+/* 4. 抽屉面板：默认隐藏在屏幕右侧外部，通过滑动动画展开 */
+.drawer-panel {
+  position: fixed !important;
+  top: 0 !important;
+  right: -100% !important;
+  /* 默认隐藏在视口外 */
+  width: 33vw !important;
+  height: 100vh !important;
+  background: #ffffff !important;
+  box-shadow: -3px 0 15px rgba(0, 0, 0, 0.2) !important;
+  transition: right 0.35s cubic-bezier(0.4, 0, 0.2, 1) !important;
+  pointer-events: all !important;
+  /* 面板内允许交互 */
+  overflow: hidden !important;
+  z-index: 999999999998 !important;
+}
+
+/* 抽屉面板：展开状态，滑入视口 */
+.drawer-panel.open {
+  right: 0 !important;
+}
+
+/* 抽屉面板：放大扩展状态，增加面板宽度 */
+.drawer-panel.expanded {
+  width: 75vw !important;
+  transition: right 0.35s cubic-bezier(0.4, 0, 0.2, 1), width 0.35s cubic-bezier(0.4, 0, 0.2, 1) !important;
+}
+
+/* 移动端适配：小屏幕下抽屉面板宽度调整 */
+@media (max-width: 768px) {
+  .drawer-panel {
+    width: 90vw !important;
+  }
+
+  .drawer-panel.expanded {
+    width: 100vw !important;
+  }
+}
+
+/* 5. 抽屉头部：包含标题、收起和放大按钮，使用Flex布局两端对齐 */
+.drawer-header {
+  height: 60px !important;
+  padding: 15px !important;
+  border-bottom: 1px solid #f0f0f0 !important;
+  display: flex !important;
+  justify-content: space-between !important;
+  align-items: center !important;
+}
+
+/* 抽屉标题文字样式 */
+.drawer-title {
+  font-size: 18px !important;
+  font-weight: bold !important;
+  color: #333 !important;
+}
+
+/* 6. 抽屉内的收起按钮：红色警告色，带有左侧外边距 */
+.close-btn {
+  padding: 8px 16px !important;
+  background: #ff4d4f !important;
+  color: #fff !important;
+  border-radius: 6px !important;
+  cursor: pointer !important;
+  font-size: 14px !important;
+  transition: background 0.2s ease !important;
+  margin-left: 200px !important;
+  /* 向右偏移100px */
+}
+
+/* 收起按钮：悬停效果 */
+.close-btn:hover {
+  background: #ff7875 !important;
+}
+
+/* 7. 抽屉内的放大/调整按钮：灰色默认色 */
+.resize-btn {
+  padding: 8px 16px !important;
+  background: #f5f5f5 !important;
+  border-radius: 6px !important;
+  cursor: pointer !important;
+  font-size: 14px !important;
+  color: #333 !important;
+  transition: background 0.2s ease !important;
+}
+
+/* 放大按钮：悬停效果 */
+.resize-btn:hover {
+  background: #e6f7ff !important;
+}
+
+/* 8. 抽屉内容区：占满头部以下高度，内容溢出时垂直滚动 */
+.drawer-body {
+  height: calc(100vh - 60px) !important;
+  overflow-y: auto !important;
+  padding: 15px !important;
+}
+
+/* 9. 章节列表容器：底部分割线与间距 */
+.chapter-list {
+  margin-bottom: 20px !important;
+  padding-bottom: 20px !important;
+  border-bottom: 1px solid #f0f0f0 !important;
+}
+
+/* 单个章节项：卡片式设计，可点击 */
+.chapter-item {
+  padding: 12px !important;
+  margin: 8px 0 !important;
+  background: #f5f5f5 !important;
+  border-radius: 6px !important;
+  cursor: pointer !important;
+  font-size: 16px !important;
+  color: #333333 !important;
+  transition: background 0.2s ease !important;
+}
+
+/* 章节项：悬停高亮效果 */
+.chapter-item:hover {
+  background: #e6f7ff !important;
+}
+
+/* 章节项：选中/激活状态，主题色高亮 */
+.chapter-item.active {
+  background: #2d8cf0 !important;
+  color: #fff !important;
+}
+
+/* 10. 章节正文内容排版 */
+.chapter-content {
+  line-height: 1.6 !important;
+  color: #333 !important;
+  font-size: 16px !important;
+  margin-bottom: 20px !important;
+}
+
+/* 正文段落间距 */
+.chapter-content p {
+  margin-bottom: 10px !important;
+}
+
+/* 11. 章节内图片样式：自适应宽度，圆角 */
+.chapter-img {
+  width: 100% !important;
+  margin: 10px 0 !important;
+  border-radius: 8px !important;
+  object-fit: cover !important;
+}
+
+/* 12. 加载状态提示文本 */
+.loading {
+  text-align: center !important;
+  padding: 30px 0 !important;
+  font-size: 16px !important;
+  color: #666666 !important;
+}
