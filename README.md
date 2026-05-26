@@ -33,11 +33,8 @@ hexo-chapter-drawer/
 ### github安装
 
 1. 复刻仓库
-
-2. ```bash
-
+```
 npm install github:你的GitHub用户名/hexo-chapter-drawer --save
-
 ```
 
 # 使用说明
@@ -46,7 +43,7 @@ npm install github:你的GitHub用户名/hexo-chapter-drawer --save
 
 在博客根目录 `_config.yml` 末尾添加：
 
-```yaml
+```
 # 漫画章节抽屉插件
 chapter_drawer:
   enable: true        # 全局总开关（false=关闭整个插件）
