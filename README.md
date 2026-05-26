@@ -30,11 +30,9 @@ hexo-chapter-drawer/
 
 在你的 **Hexo博客根目录** 执行命令：
 
-### github安装
-
-1. 复刻仓库
+### 
 ```
-npm install github:你的GitHub用户名/hexo-chapter-drawer --save
+npm install github:exwxsz/hexo-chapter-drawer --save
 ```
 
 # 使用说明
